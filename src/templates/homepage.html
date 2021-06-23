@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>Тестирование Экстрасенсов</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Тестирование Экстрасенсов</h1>
+    <h2>Загадайте число</h2>
+    <form action="/new_test" method="POST">
+        <input type="submit" class="start" value="Загадал">
+    </form>
+
+    {% if empty is false %}
+    <div>
+        <h2>Результаты тестирования</h2>
+        <h3>Процент удачных догадок</h3>
+        <table>
+            <tr>
+                <th>
+                    Экстрасенс
+                </th>
+                <th>
+                    % угадываний
+                </th>
+            </tr>
+
+            {% for key, value in veracity.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                {% if value.attempts == 0 %}
+                <td>Нет результатов</td>
+                {% else %}
+                <td>
+                    {{ "{:.2%}".format(value.successful_attempts / value.attempts) }}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </table>
+        <h3>История догадок</h3>
+        <table>
+            <tr>
+                <th>Число</th>
+                {% for name in psychics %}
+                <th>{{name}}</th>
+                {% endfor %}
+            </tr>
+
+            {% for test in history %}
+            <tr>
+                <td>{{ test.expected_number }}</td>
+                {% for name in psychics %}
+                {% if test.psychic_predictions.get(name) is none %}
+                <td>-</td>
+                {% else %}
+                <td>{{ test.psychic_predictions.get(name) }}</td>
+                {% endif %}
+                {% endfor %}
+
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    {% endif %}
+</body>
+
+</html>

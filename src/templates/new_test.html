@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>Тестирование Экстрасенсов</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <h1>Предсказания</h1>
+        <table>
+            <tr>
+                <th>
+                    Экстрасенс
+                </th>
+                <th>
+                    Предсказание
+                </th>
+            </tr>
+            {% for psychic in psychics %}
+            <tr>
+                {% if predictions.get(psychic) is not none %}
+                <td>{{ psychic }}</td>
+                <td>{{ predictions.get(psychic) }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    <br>
+    <form action="/expected_number" method="POST">
+        <label for="test_number">Введите число от 10 до 99:</label>
+        <br>
+        <input type="number" id="test_number" name="test_number">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+version: "3.8"
+services: 
+    psychicstesting:
+        build:  .
+        container_name: psychicstesting
+        ports:
+        - "80:80"
