@@ -18,13 +18,14 @@ def homepage(request: Request,
     session = session_manager.get_session(user)
     if user is None or session is None:
         return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
-    predictions = session.create_predictions()
+    predictions = session.get_or_create_predictions()
 
     return templates.TemplateResponse(
         "new_test.html",
         {
             "request": request,
             "predictions": predictions,
-            "psychics": psychics_names
+            "psychics": psychics_names,
+            "errors": session.errors
         }
     )

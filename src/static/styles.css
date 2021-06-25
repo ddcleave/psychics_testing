@@ -30,3 +30,7 @@ tr:nth-child(odd) td {
     height:60px;
     width:200px;
 }
+
+ul.errors {
+    color: red;
+}

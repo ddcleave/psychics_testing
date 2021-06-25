@@ -33,7 +33,19 @@
         <label for="test_number">Введите число от 10 до 99:</label>
         <br>
         <input type="number" id="test_number" name="test_number">
-        <input type="submit" value="Submit">
+        <ul class="errors">
+        {% for error in errors %}
+            <li>
+                {% if error['type'] == 'value_error.number.not_le' %}
+                    Число больше чем 99
+                {% endif %}
+                {% if error['type'] == 'value_error.number.not_ge' %}
+                    Число меньше чем 10
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+        <input type="submit" value="Отправить">
     </form>
 </body>
 
