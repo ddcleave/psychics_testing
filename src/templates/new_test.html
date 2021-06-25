@@ -32,7 +32,7 @@
     <form action="/expected_number" method="POST">
         <label for="test_number">Введите число от 10 до 99:</label>
         <br>
-        <input type="number" id="test_number" name="test_number">
+        <input type="number" id="test_number" name="test_number" required>
         <ul class="errors">
         {% for error in errors %}
             <li>
