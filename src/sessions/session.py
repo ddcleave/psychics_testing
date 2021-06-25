@@ -1,6 +1,7 @@
 from src.services.entities import ResultTest, Results
 from src.services.history import History
 from src.psychics import all_psychics
+from copy import deepcopy
 
 
 class Session:
@@ -24,6 +25,11 @@ class Session:
             ResultTest(expected_number=expected_number,
                        psychic_predictions=self.predictions)
         )
+
+    def get_errors(self) -> list[dict]:
+        errors = deepcopy(self.errors)
+        self.errors = []
+        return errors
 
     def get_results(self) -> Results:
         return self.history.get_tests()

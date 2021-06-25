@@ -26,6 +26,6 @@ def homepage(request: Request,
             "request": request,
             "predictions": predictions,
             "psychics": psychics_names,
-            "errors": session.errors
+            "errors": session.get_errors()
         }
     )
